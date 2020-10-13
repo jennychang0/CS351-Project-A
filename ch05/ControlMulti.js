@@ -236,9 +236,100 @@ function initVertexBuffer() {
      	// Face 3: (base side)  
     -c30, -0.5,  0.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 3
      0.0,  1.0,  0.0, 1.0,  	1.0,  0.0,  0.0,	// Node 2
-     c30, -0.5,  0.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 1
+	 c30, -0.5,  0.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 1
+	 
+
+	 ///////////////////////
+
+	 0.0, 0.0, 0.0, 1.0,            1.0, 0.0, 0.0, // Node A
+	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+
+	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
+
+	 0.0, 0.0, 0.0, 1.0,            1.0, 0.0, 0.0, // Node A
+	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
+	 0.0, 1.0, 0.5, 1.0,            0.0, 0.0, 0.0,// Node E
+
+	 0.0, 0.0, 0.0, 1.0,            1.0, 0.0, 0.0, // Node A
+	 0.0, 1.0, 0.5, 1.0,            0.0, 0.0, 0.0,// Node E
+	 0.0, 1.0, 0.0, 1.0,            1.0, 1.0, 1.0, // Node F
+
+	 0.5, 1.0, 0.0, 1.0,             0.0, 1.0, 1.0, //Node G
+	 0.5, 1.0, 0.5, 1.0,             0.5, 1.0, 1.0, //Node H
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
+	 0.5, 1.0, 0.5, 1.0,             0.5, 1.0, 1.0, //Node H
+
+	 0.0, 0.0, 0.0, 1.0,            1.0, 0.0, 0.0, // Node A
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+	 0.0, 1.0, 0.0, 1.0,            1.0, 1.0, 1.0, // Node F
+
+	 0.0, 1.0, 0.0, 1.0,            1.0, 1.0, 1.0, // Node F
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+	 0.5, 1.0, 0.0, 1.0,             0.0, 1.0, 1.0, //Node G
+
+	 0.0, 1.0, 0.5, 1.0,            0.0, 0.0, 0.0,// Node E
+	 0.5, 1.0, 0.5, 1.0,             0.5, 1.0, 1.0, //Node H
+	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
+
+
+	 0.0, 1.0, 0.5, 1.0,            0.0, 0.0, 0.0,// Node E
+	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
+	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
+
+	 0.5, 1.0, 0.0, 1.0,             0.0, 1.0, 1.0, //Node G
+	 0.5, 1.0, 0.5, 1.0,             0.5, 1.0, 1.0, //Node H
+	 0.25, 1.1, 0.25, 1.0,          1.0, 0.0, 1.0, //Node I
+
+
+	 0.25, 1.1, 0.25, 1.0,          1.0, 0.0, 1.0, //Node I
+	 0.0, 1.0, 0.0, 1.0,            1.0, 1.0, 1.0, // Node F
+	 0.5, 1.0, 0.0, 1.0,             0.0, 1.0, 1.0, //Node G
+
+	 0.25, 1.1, 0.25, 1.0,          1.0, 0.0, 1.0, //Node I
+	 0.0, 1.0, 0.0, 1.0,            1.0, 1.0, 1.0, // Node F
+	 0.0, 1.0, 0.5, 1.0,            0.0, 0.0, 0.0,// Node E
+
+	 0.25, 1.1, 0.25, 1.0,          1.0, 0.0, 1.0, //Node I
+	 0.0, 1.0, 0.5, 1.0,            0.0, 0.0, 0.0,// Node E
+	 0.5, 1.0, 0.5, 1.0,             0.5, 1.0, 1.0, //Node H
+
+	 0.0, 0.0, 0.0, 1.0,            1.0, 0.0, 0.0, // Node A
+	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
+	 0.25, -0.1, 0.25, 1.0,        0.5, 0.5, 1.0, // Node J
+
+
+	 0.0, 0.0, 0.0, 1.0,            1.0, 0.0, 0.0, // Node A
+	 0.25, -0.1, 0.25, 1.0,        0.5, 0.5, 1.0, // Node J
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+
+	 0.25, -0.1, 0.25, 1.0,        0.5, 0.5, 1.0, // Node J
+	 0.5, 0.0, 0.0, 1.0,            1.0, 0.0, 1.0, //Node C
+	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
+
+	 0.25, -0.1, 0.25, 1.0,        0.5, 0.5, 1.0, // Node J
+	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
+	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
+
+
+
+
+
+
+
+
+
+
+
+
+
   ]);
-  g_vertsMax = 12;		// 12 tetrahedron vertices.
+  g_vertsMax = 58;		// 12 tetrahedron vertices.
   								// we can also draw any subset of these we wish,
   								// such as the last 3 vertices.(onscreen at upper right)
 	
@@ -323,12 +414,14 @@ function drawAll() {
 	// console.log("clear value:", clrColr);
 	
   //-------Draw Spinning Tetrahedron
-  g_modelMatrix.setTranslate(-0.4,-0.4, 0.0);  // 'set' means DISCARD old matrix,
+
+  //// draw lower body
+  g_modelMatrix.setTranslate(-0.4,-0.8, 0.0);  // 'set' means DISCARD old matrix,
   						// (drawing axes centered in CVV), and then make new
   						// drawing axes moved to the lower-left corner of CVV. 
   g_modelMatrix.scale(1,1,-1);							// convert to left-handed coord sys
   																				// to match WebGL display canvas.
-  g_modelMatrix.scale(0.5, 0.5, 0.5);
+  g_modelMatrix.scale(0.25, 0.5, 0.5);
   						// if you DON'T scale, tetra goes outside the CVV; clipped!
   g_modelMatrix.rotate(g_angle01, 0, 1, 0);  // Make new drawing axes that
 
@@ -337,7 +430,34 @@ function drawAll() {
   		// Pass our current matrix to the vertex shaders:
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
   		// Draw triangles: start at vertex 0 and draw 12 vertices
-  gl.drawArrays(gl.TRIANGLES, 0, 12);
+  //gl.drawArrays(gl.TRIANGLES, 0, 12);
+  gl.drawArrays(gl.TRIANGLES, 12, 42);
+
+  //pushMatrix(g_modelMatrix)
+
+  /////  draw the smaller body above big body
+  g_modelMatrix.translate(0.07, 1.93, 0.43);
+  g_modelMatrix.scale(1, -1, -1);
+  g_modelMatrix.scale(0.75, 0.75, 0.75);
+  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+  gl.drawArrays(gl.TRIANGLES, 12, 54);
+
+  pushMatrix(g_modelMatrix)
+  
+ /////draw head
+ g_modelMatrix.translate(0.07, 1.93, 0.43);
+ g_modelMatrix.translate(0.05, -2.3, -0.3)
+ g_modelMatrix.scale(1, 0.5, 1);
+ g_modelMatrix.scale(0.5, 0.5, 0.5);
+ gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+ gl.drawArrays(gl.TRIANGLES, 12, 42);
+
+ 
+
+
+
+
+
 
   // NEXT, create different drawing axes, and...
   g_modelMatrix.setTranslate(0.4, 0.4, 0.0);  // 'set' means DISCARD old matrix,
