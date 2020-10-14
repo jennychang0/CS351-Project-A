@@ -321,27 +321,27 @@ function initVertexBuffer() {
 	-2.0, -2.0, 0.0,  1.0,		0.2, 0.2, 0.2, // P
 
 	2.0,  2.0,  0.0,  1.0,		1.0, 1.0, 1.0, // B
-	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-8.0,  8.0, 0.0, 1.0,		1.0, 0.4, 0.6, // W
 	1.0,  1.0,  1.0,  1.0,		0.2, 0.2, 0.2, // R
 
 	1.0,  1.0,  1.0,  1.0,		0.2, 0.2, 0.2, // R
-	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-8.0,  8.0, 0.0, 1.0,		1.0, 0.4, 0.6, // W
 	-1.0, -1.0, 1.0,  1.0,		1.0, 1.0, 1.0, // O
 
 	-1.0, -1.0, 1.0,  1.0,		1.0, 1.0, 1.0, // O
-	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-8.0,  8.0, 0.0, 1.0,		1.0, 0.4, 0.6, // W
 	-2.0, -2.0, 0.0,  1.0,		0.2, 0.2, 0.2, // P
 
 	-2.0, -2.0, 0.0,  1.0,		0.2, 0.2, 0.2, // P
-	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-8.0,  8.0, 0.0, 1.0,		1.0, 0.4, 0.6, // W
 	-1.0, -1.0, -1.0, 1.0,		1.0, 1.0, 1.0, // G
 
 	-1.0, -1.0, -1.0, 1.0,		1.0, 1.0, 1.0, // G
-	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-8.0,  8.0, 0.0, 1.0,		1.0, 0.4, 0.6, // W
 	1.0,  1.0, -1.0,  1.0,		0.2, 0.2, 0.2, // Y
 
 	1.0,  1.0, -1.0,  1.0,		0.2, 0.2, 0.2, // Y
-	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-8.0,  8.0, 0.0, 1.0,		1.0, 0.4, 0.6, // W
 	2.0,  2.0,  0.0,  1.0,		1.0, 1.0, 1.0, // B
 
 
@@ -445,6 +445,57 @@ function initVertexBuffer() {
 	 0.25, -0.1, 0.25, 1.0,        0.5, 0.5, 1.0, // Node J
 	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
 	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
+
+
+	 //Giraffe horns
+	0.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // S
+	0.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // T
+	1.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // U
+
+	0.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // S
+	1.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // U
+	1.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // V
+
+	0.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // S
+	0.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // T
+	0.0,  5.0,  0.0,  1.0,		0.5, 0.25, 0.0, // W
+
+	0.0,  5.0,  0.0,  1.0,		0.5, 0.25, 0.0, // W
+	0.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // T
+	0.0,  5.0,  1.0,  1.0,		0.2, 0.1, 0.0, // Z
+
+	0.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // T
+	1.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // U
+	0.0,  5.0,  1.0,  1.0,		0.2, 0.1, 0.0, // Z
+
+	0.0,  5.0,  1.0,  1.0,		0.2, 0.1, 0.0, // Z
+	1.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // U
+	1.0,  5.0,  1.0,  1.0,		0.5, 0.25, 0.0, // Y
+
+	0.0,  5.0,  0.0,  1.0,		0.5, 0.25, 0.0, // W
+	1.0,  5.0,  0.0,  1.0,		0.2, 0.1, 0.0, // X
+	0.0,  5.0,  1.0,  1.0,		0.2, 0.1, 0.0, // Z
+
+	1.0,  5.0,  0.0,  1.0,		0.2, 0.1, 0.0, // X
+	0.0,  5.0,  1.0,  1.0,		0.2, 0.1, 0.0, // Z
+	1.0,  5.0,  1.0,  1.0,		0.5, 0.25, 0.0, // Y
+
+	0.0,  5.0,  0.0,  1.0,		0.5, 0.25, 0.0, // W
+	0.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // S
+	1.0,  5.0,  0.0,  1.0,		0.2, 0.1, 0.0, // X
+
+	1.0,  5.0,  0.0,  1.0,		0.2, 0.1, 0.0, // X
+	0.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // S
+	1.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // V
+
+	1.0,  5.0,  0.0,  1.0,		0.2, 0.1, 0.0, // X
+	1.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // U
+	1.0,  5.0,  1.0,  1.0,		0.5, 0.25, 0.0, // Y
+
+	1.0,  5.0,  0.0,  1.0,		0.2, 0.1, 0.0, // X
+	1.0,  0.0,  1.0,  1.0,		1.0, 1.0, 1.0, // U
+	1.0,  0.0,  0.0,  1.0,		1.0, 1.0, 1.0, // V
+
 
   ]);
   g_vertsMax = 58;		// 12 tetrahedron vertices.
@@ -551,7 +602,9 @@ function drawAll() {
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
   		// Draw triangles: start at vertex 0 and draw 12 vertices
   //gl.drawArrays(gl.TRIANGLES, 0, 12);
-  gl.drawArrays(gl.TRIANGLES, 90, 42);
+
+  DrawLowerBody();
+  
 
   //pushMatrix(g_modelMatrix)
 
@@ -564,7 +617,7 @@ function drawAll() {
 
 
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
-  gl.drawArrays(gl.TRIANGLES, 90, 54);
+  DrawUpperBody();
 
   pushMatrix(g_modelMatrix)
   
@@ -573,7 +626,8 @@ function drawAll() {
  g_modelMatrix.scale(0.5, 0.25, 0.5);
  g_modelMatrix.rotate(g_balloon_angle01*1.1, 1,0,0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 90, 42);
+ DrawHead();
+ 
 
 
  ////// ARMS
@@ -591,7 +645,9 @@ function drawAll() {
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 90, 30);
+
+ DrawLeftArm();
+ 
  
 
 
@@ -602,8 +658,9 @@ function drawAll() {
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 90, 30); 
 
+ DrawRightArm();
+ 
 
 
  ///JESSICA'S GIRAFFE
@@ -670,6 +727,43 @@ g_modelMatrix.rotate(dist*120.0, -g_yMdragTot+0.0001, g_xMdragTot+0.0001, 0.0);
 	DrawGiraffeHead();
 	pushMatrix(g_modelMatrix);
 
+		// Draw Giraffe Left Horn
+	g_modelMatrix.translate(1.0, 1.0, 0.5);  // 'set' means DISCARD old matrix,
+	// (drawing axes centered in CVV), and then make new
+		// drawing axes moved to the lower-left corner of CVV. 
+	//g_modelMatrix.scale(1.0, 1.0, 1.0);							// convert to left-handed coord sys
+																// to match WebGL display canvas.
+	g_modelMatrix.scale(0.5, 0.5, 0.5);
+		// if you DON'T scale, tetra goes outside the CVV; clipped!
+	g_modelMatrix.rotate(-120, 0, 0, 1);  // Make new drawing axes that
+
+	// DRAW:  Use this matrix to transform & draw 
+	//						the first set of vertices stored in our VBO:
+	// Pass our current matrix to the vertex shaders:
+	gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+	// Draw triangles: start at vertex 0 and draw 12 vertices
+	DrawGiraffeHorn();
+	g_modelMatrix = popMatrix();
+	pushMatrix(g_modelMatrix);
+
+	// Draw Giraffe Right Horn
+	g_modelMatrix.translate(1.0, 1.0, -1);  // 'set' means DISCARD old matrix,
+	// (drawing axes centered in CVV), and then make new
+		// drawing axes moved to the lower-left corner of CVV. 
+	//g_modelMatrix.scale(1.0, 1.0, 1.0);							// convert to left-handed coord sys
+																// to match WebGL display canvas.
+	g_modelMatrix.scale(0.5, 0.5, 0.5);
+		// if you DON'T scale, tetra goes outside the CVV; clipped!
+	g_modelMatrix.rotate(-120, 0, 0, 1);  // Make new drawing axes that
+
+	// DRAW:  Use this matrix to transform & draw 
+	//						the first set of vertices stored in our VBO:
+	// Pass our current matrix to the vertex shaders:
+	gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+	// Draw triangles: start at vertex 0 and draw 12 vertices
+	DrawGiraffeHorn();
+	g_modelMatrix = popMatrix();
+	pushMatrix(g_modelMatrix);
 	
 	// Draw Giraffe Left Ear
 	g_modelMatrix.translate(0.0, 2.0, 1.0);  // 'set' means DISCARD old matrix,
@@ -709,6 +803,28 @@ g_modelMatrix.rotate(dist*120.0, -g_yMdragTot+0.0001, g_xMdragTot+0.0001, 0.0);
 	DrawGiraffeEar();
 	g_modelMatrix = popMatrix();
 
+
+}
+
+function DrawLowerBody(){
+	gl.drawArrays(gl.TRIANGLES, 90, 42);
+}
+
+function DrawUpperBody(){
+	gl.drawArrays(gl.TRIANGLES, 90, 54);
+}
+
+function DrawHead(){
+	gl.drawArrays(gl.TRIANGLES, 90, 42);
+}
+
+function DrawLeftArm(){
+	gl.drawArrays(gl.TRIANGLES, 90, 30);
+}
+
+function DrawRightArm(){
+	gl.drawArrays(gl.TRIANGLES, 90, 30); 
+
 }
 
 function DrawGiraffeNeck() {
@@ -721,6 +837,10 @@ function DrawGiraffeHead() {
 
 function DrawGiraffeEar() {
 	gl.drawArrays(gl.TRIANGLES, 72, 18);
+}
+
+function DrawGiraffeHorn() {
+	gl.drawArrays(gl.TRIANGLES, 144, 36);
 }
 
 // Last time that this function was called:  (used for animation timing)
