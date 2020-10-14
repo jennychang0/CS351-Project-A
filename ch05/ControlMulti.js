@@ -68,7 +68,12 @@ var g_lastMS = Date.now();    			// Timestamp for most-recently-drawn image;
                                     // (now called 'timerAll()' ) to find time
                                     // elapsed since last on-screen image.
 var g_angle01 = 0;                  // initial rotation angle
-var g_angle01Rate = 45.0;           // rotation speed, in degrees/second 
+var g_angle01Rate = 45.0;  
+var g_balloon_angle02 = 0;
+var g_balloon_angle02Rate = 90;     // rotation speed, in degrees/second 
+
+var g_xdistance = 0;
+var g_xdistancerate = 0.2;
 
 //------------For mouse click-and-drag: -------------------------------
 var g_isDrag=false;		// mouse-drag: true when user holds down mouse button
@@ -179,8 +184,9 @@ function main() {
   // ANIMATION: create 'tick' variable whose value is this function:
   //----------------- 
   var tick = function() {
-    g_angle01 = animate(g_angle01);  // Update the rotation angle
-    drawAll();   // Draw all parts
+    // g_angle01 = animate(g_angle01);  // Update the rotation angle
+    animate();
+	drawAll();   // Draw all parts
 //    console.log('g_angle01=',g_angle01.toFixed(5)); // put text in console.
 
 //	Show some always-changing text in the webpage :  
@@ -316,18 +322,6 @@ function initVertexBuffer() {
 	 0.5, 0.0, 0.5, 1.0,            1.0, 1.0, 0.0, //Node D
 	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
 
-
-
-
-
-
-
-
-
-
-
-
-
   ]);
   g_vertsMax = 58;		// 12 tetrahedron vertices.
   								// we can also draw any subset of these we wish,
@@ -422,9 +416,11 @@ function drawAll() {
   g_modelMatrix.scale(1,1,-1);							// convert to left-handed coord sys
   																				// to match WebGL display canvas.
   g_modelMatrix.scale(0.25, 0.5, 0.5);
+  g_modelMatrix.rotate(30, 0, 1, 0);
   						// if you DON'T scale, tetra goes outside the CVV; clipped!
-  g_modelMatrix.rotate(g_angle01, 0, 1, 0);  // Make new drawing axes that
-
+  g_modelMatrix.rotate(g_angle01, 1, 0, 0);  // Make new drawing axes that
+  g_modelMatrix.translate(-0.25, -1.2, -0.25);
+  g_modelMatrix.translate(g_xdistance, 1.0, 0, 0);
   // DRAW TETRA:  Use this matrix to transform & draw 
   //						the first set of vertices stored in our VBO:
   		// Pass our current matrix to the vertex shaders:
@@ -436,27 +432,48 @@ function drawAll() {
   //pushMatrix(g_modelMatrix)
 
   /////  draw the smaller body above big body
-  g_modelMatrix.translate(0.07, 1.93, 0.43);
-  g_modelMatrix.scale(1, -1, -1);
-  g_modelMatrix.scale(0.75, 0.75, 0.75);
+  g_modelMatrix.translate(0.07, 1.83, 0.43);
+  g_modelMatrix.scale(0.75, -0.77, -0.45);
+  g_modelMatrix.rotate(g_angle01*0.5, 1,0,0);
+//   g_modelMatrix.translate(-0.25, 0.0, -0.25);
+//   g_modelMatrix.translate(-0.1, 0, 0);
+
+
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
   gl.drawArrays(gl.TRIANGLES, 12, 54);
 
   pushMatrix(g_modelMatrix)
   
  /////draw head
- g_modelMatrix.translate(0.07, 1.93, 0.43);
- g_modelMatrix.translate(0.05, -2.3, -0.3)
- g_modelMatrix.scale(1, 0.5, 1);
- g_modelMatrix.scale(0.5, 0.5, 0.5);
+ g_modelMatrix.translate(0.13, -0.26, 0.03);
+ g_modelMatrix.scale(0.5, 0.25, 0.5);
+ g_modelMatrix.rotate(g_angle01*1.1, 1,0,0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
  gl.drawArrays(gl.TRIANGLES, 12, 42);
 
+
+ ////// ARMS
+
+ g_modelMatrix = popMatrix();
+ pushMatrix(g_modelMatrix);
+
+ g_modelMatrix.rotate(90, 0, 0, 1);
+ g_modelMatrix.translate(0.2, 0, 0.2)
+ g_modelMatrix.scale(0.3, 3, 0.3);
+ g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
+ gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+ gl.drawArrays(gl.TRIANGLES, 12, 30);
  
 
 
+g_modelMatrix = popMatrix();
 
-
+ g_modelMatrix.rotate(270, 0, 0, 1);
+ g_modelMatrix.translate(-0.2, 0.5, 0.1);
+ g_modelMatrix.scale(0.3, 3, 0.3);
+ g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
+ gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+ gl.drawArrays(gl.TRIANGLES, 12, 30);
 
 
   // NEXT, create different drawing axes, and...
@@ -524,6 +541,28 @@ function animate(angle) {
   return newAngle;
 }
 
+function animate(){
+	var now = Date.now();
+	var elapsed = now- g_last;
+	g_last = now;
+
+	if(g_angle01 >  30.0 && g_angle01Rate > 0) g_angle01Rate = -g_angle01Rate;
+  	if(g_angle01 < -30.0 && g_angle01Rate < 0) g_angle01Rate = -g_angle01Rate;
+	  g_angle01 = g_angle01 + (g_angle01Rate * elapsed) / 1000.0;
+	  
+	  var newAngle = g_balloon_angle02 + (g_balloon_angle02Rate * elapsed) / 1000.0;
+	  if(newAngle > 180.0) newAngle = newAngle - 360.0;
+	  if(newAngle <-180.0) newAngle = newAngle + 360.0;
+	  g_balloon_angle02= newAngle;
+
+	
+	  var newdisplacement = g_xdistance + g_xdistancerate * elapsed / 1000.0;
+	  if (newdisplacement > 0.8) g_xdistancerate = -g_xdistancerate;
+	  if (newdisplacement < -0.8) g_xdistancerate = -g_xdistancerate;
+	  g_xdistance = newdisplacement;
+	
+}
+
 //==================HTML Button Callbacks======================
 
 function angleSubmit() {
@@ -562,12 +601,19 @@ function spinDown() {
 function runStop() {
 // Called when user presses the 'Run/Stop' button
   if(g_angle01Rate*g_angle01Rate > 1) {  // if nonzero rate,
-    myTmp = g_angle01Rate;  // store the current rate,
-    g_angle01Rate = 0;      // and set to zero.
+	myTmp = g_angle01Rate;  // store the current rate,
+	Tmp2 = g_balloon_angle02Rate;
+	g_angle01Rate = 0;      // and set to zero.
+	g_balloon_angle02Rate = 0;
+	X_tmp = g_xdistancerate;
+	g_xdistancerate = 0;
   }
   else {    // but if rate is zero,
-  	g_angle01Rate = myTmp;  // use the stored rate.
+	  g_angle01Rate = myTmp;  // use the stored rate.
+	  g_balloon_angle02Rate = Tmp2;
+	  g_xdistancerate = X_tmp;
   }
+  
 }
 
 //===================Mouse and Keyboard event-handling Callbacks
