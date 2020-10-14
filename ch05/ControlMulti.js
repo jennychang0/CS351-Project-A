@@ -803,7 +803,6 @@ g_modelMatrix.rotate(dist*120.0, -g_yMdragTot+0.0001, g_xMdragTot+0.0001, 0.0);
 	DrawGiraffeEar();
 	g_modelMatrix = popMatrix();
 
-
 }
 
 function DrawLowerBody(){
@@ -824,7 +823,6 @@ function DrawLeftArm(){
 
 function DrawRightArm(){
 	gl.drawArrays(gl.TRIANGLES, 90, 30); 
-
 }
 
 function DrawGiraffeNeck() {
