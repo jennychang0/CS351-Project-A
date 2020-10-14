@@ -465,57 +465,14 @@ function drawAll() {
  
 
 
-g_modelMatrix = popMatrix();
+ g_modelMatrix = popMatrix();
 
  g_modelMatrix.rotate(270, 0, 0, 1);
  g_modelMatrix.translate(-0.2, 0.5, 0.1);
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 12, 30);
-
-
-  // NEXT, create different drawing axes, and...
-  g_modelMatrix.setTranslate(0.4, 0.4, 0.0);  // 'set' means DISCARD old matrix,
-  						// (drawing axes centered in CVV), and then make new
-  						// drawing axes moved to the lower-left corner of CVV.
-  g_modelMatrix.scale(1,1,-1);							// convert to left-handed coord sys
-  																				// to match WebGL display canvas.
-  g_modelMatrix.scale(0.3, 0.3, 0.3);				// Make it smaller.
-  
-  // Mouse-Dragging for Rotation:
-	//-----------------------------
-	// Attempt 1:  X-axis, then Y-axis rotation:
-/*  						// First, rotate around x-axis by the amount of -y-axis dragging:
-  g_modelMatrix.rotate(-g_yMdragTot*120.0, 1, 0, 0); // drag +/-1 to spin -/+120 deg.
-  						// Then rotate around y-axis by the amount of x-axis dragging
-	g_modelMatrix.rotate( g_xMdragTot*120.0, 0, 1, 0); // drag +/-1 to spin +/-120 deg.
-				// Acts SENSIBLY if I always drag mouse to turn on Y axis, then X axis.
-				// Acts WEIRDLY if I drag mouse to turn on X axis first, then Y axis.
-				// ? Why is is 'backwards'? Duality again!
-*/
-	//-----------------------------
-
-	// Attempt 2: perp-axis rotation:
-							// rotate on axis perpendicular to the mouse-drag direction:
-	var dist = Math.sqrt(g_xMdragTot*g_xMdragTot + g_yMdragTot*g_yMdragTot);
-							// why add 0.001? avoids divide-by-zero in next statement
-							// in cases where user didn't drag the mouse.)
-	g_modelMatrix.rotate(dist*120.0, -g_yMdragTot+0.0001, g_xMdragTot+0.0001, 0.0);
-				// Acts weirdly as rotation amounts get far from 0 degrees.
-				// ?why does intuition fail so quickly here?
-
-	//-------------------------------
-	// Attempt 3: Quaternions? What will work better?
-
-					// YOUR CODE HERE
-
-	//-------------------------------
-	// DRAW 2 TRIANGLES:		Use this matrix to transform & draw
-	//						the different set of vertices stored in our VBO:
-  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
-  		// Draw only the last 2 triangles: start at vertex 6, draw 6 vertices
-  gl.drawArrays(gl.TRIANGLES, 6,6);
+ gl.drawArrays(gl.TRIANGLES, 12, 30); 
 
 }
 
