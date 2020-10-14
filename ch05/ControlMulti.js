@@ -63,16 +63,31 @@ var g_modelMatLoc;                  // that uniform's location in the GPU
 
 //------------For Animation---------------------------------------------
 var g_isRun = true;                 // run/stop for animation; used in tick().
-var g_lastMS = Date.now();    			// Timestamp for most-recently-drawn image; 
-                                    // in milliseconds; used by 'animate()' fcn 
+var g_lastMS = Date.now();    			// Timestamp for most-recently-drawn image;
+                                    // in milliseconds; used by 'animate()' fcn
                                     // (now called 'timerAll()' ) to find time
                                     // elapsed since last on-screen image.
+
+var g_angle01 = 0;                  // initial rotation angle
+var g_angle01Rate = 45.0;           // rotation speed, in degrees/second
+
+var g_angleG_n = 0;                  // second rotation angle
+var g_angleG_nRate = 20.0;          // second rotation angle rate, in deg/sec
+var g_angleG_nMax = 35.0;            // max angle for rocking back and forth
+var g_angleG_nMin = -10.0;
+
+var g_angleG_h = 20.0;                  // second rotation angle
+var g_angleG_hRate = -20.0;          // second rotation angle rate, in deg/sec
+var g_angleG_hMax = 30.0;            // max angle for rocking back and forth
+var g_angleG_hMin = -15.0;
+
 var g_balloon_angle01 = 0;                  // initial rotation angle
 var g_balloon_angle01Rate = 45.0;  
 var g_balloon_angle02 = 0;
 var g_balloon_angle02Rate = 90;     // rotation speed, in degrees/second 
 var g_balloon_xdistance = 0;
 var g_balloon_xdistancerate = 0.2;
+
 
 //------------For mouse click-and-drag: -------------------------------
 var g_isDrag=false;		// mouse-drag: true when user holds down mouse button
@@ -183,10 +198,11 @@ function main() {
   // ANIMATION: create 'tick' variable whose value is this function:
   //----------------- 
   var tick = function() {
-    // g_balloon_angle01 = animate(g_balloon_angle01);  // Update the rotation angle
-    animate();
-	drawAll();   // Draw all parts
-//    console.log('g_balloon_angle01=',g_balloon_angle01.toFixed(5)); // put text in console.
+
+    animate();  // Update the rotation angle
+    drawAll();   // Draw all parts
+//    console.log('g_angle01=',g_angle01.toFixed(5)); // put text in console.
+
 
 //	Show some always-changing text in the webpage :  
 //		--find the HTML element called 'CurAngleDisplay' in our HTML page,
@@ -242,9 +258,118 @@ function initVertexBuffer() {
     -c30, -0.5,  0.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 3
      0.0,  1.0,  0.0, 1.0,  	1.0,  0.0,  0.0,	// Node 2
 	 c30, -0.5,  0.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 1
-	 
+	
+	// DRAW GIRAFFE
 
-	 ///////////////////////
+	// Neck
+	2.0,  2.0,  0.0,  1.0,		0.2, 0.1, 0.0, // B
+	1.0,  1.0, -1.0,  1.0,		1.0, 0.9, 0.2, // Y
+	1.0,  1.0,  1.0,  1.0,		1.0, 0.9, 0.2, // R
+
+	1.0,  1.0,  1.0,  1.0,		1.0, 0.9, 0.2, // R
+	1.0,  1.0, -1.0,  1.0,		1.0, 0.9, 0.2, // Y
+	-1.0, -1.0, 1.0,  1.0,		1.0, 0.8, 0.0, // O
+
+	1.0,  1.0, -1.0,  1.0,		1.0, 0.9, 0.2, // Y
+	-1.0, -1.0, 1.0,  1.0,		1.0, 0.8, 0.0, // O
+	-1.0, -1.0, -1.0, 1.0,		1.0, 0.8, 0.0, // G
+
+	-1.0, -1.0, -1.0, 1.0,		1.0, 0.8, 0.0, // G
+	-1.0, -1.0, 1.0,  1.0,		1.0, 0.8, 0.0, // O
+	-2.0, -2.0, 0.0,  1.0,		1.0, 0.9, 1.0, // P
+
+	2.0,  2.0,  0.0,  1.0,		0.2, 0.1, 0.0, // B
+	-14.0, 14.0, 0.0, 1.0,		0.2, 0.1, 0.0, // W
+	1.0,  1.0,  1.0,  1.0,		1.0, 0.9, 0.2, // R
+
+	1.0,  1.0,  1.0,  1.0,		1.0, 0.9, 0.2, // R
+	-14.0, 14.0, 0.0, 1.0,		0.2, 0.1, 0.0, // W
+	-1.0, -1.0, 1.0,  1.0,		1.0, 0.8, 0.0, // O
+
+	-1.0, -1.0, 1.0,  1.0,		1.0, 0.8, 0.0, // O
+	-14.0, 14.0, 0.0, 1.0,		0.2, 0.1, 0.0, // W
+	-2.0, -2.0, 0.0,  1.0,		1.0, 0.9, 1.0, // P
+
+	-2.0, -2.0, 0.0,  1.0,		1.0, 0.9, 1.0, // P
+	-14.0, 14.0, 0.0, 1.0,		0.2, 0.1, 0.0, // W
+	-1.0, -1.0, -1.0, 1.0,		1.0, 0.8, 0.0, // G
+
+	-1.0, -1.0, -1.0, 1.0,		1.0, 0.8, 0.0, // G
+	-14.0, 14.0, 0.0, 1.0,		0.2, 0.1, 0.0, // W
+	1.0,  1.0, -1.0,  1.0,		1.0, 0.9, 0.2, // Y
+
+	1.0,  1.0, -1.0,  1.0,		1.0, 0.9, 0.2, // Y
+	-14.0, 14.0, 0.0, 1.0,		0.2, 0.1, 0.0, // W
+	2.0,  2.0,  0.0,  1.0,		0.2, 0.1, 0.0, // B
+
+
+	// Head
+	2.0,  2.0,  0.0,  1.0,		1.0, 1.0, 1.0, // B
+	1.0,  1.0, -1.0,  1.0,		0.2, 0.2, 0.2, // Y
+	1.0,  1.0,  1.0,  1.0,		0.2, 0.2, 0.2, // R
+
+	1.0,  1.0,  1.0,  1.0,		0.2, 0.2, 0.2, // R
+	1.0,  1.0, -1.0,  1.0,		0.2, 0.2, 0.2, // Y
+	-1.0, -1.0, 1.0,  1.0,		1.0, 1.0, 1.0, // O
+
+	1.0,  1.0, -1.0,  1.0,		0.2, 0.2, 0.2, // Y
+	-1.0, -1.0, 1.0,  1.0,		1.0, 1.0, 1.0, // O
+	-1.0, -1.0, -1.0, 1.0,		1.0, 1.0, 1.0, // G
+
+	-1.0, -1.0, -1.0, 1.0,		1.0, 1.0, 1.0, // G
+	-1.0, -1.0, 1.0,  1.0,		1.0, 1.0, 1.0, // O
+	-2.0, -2.0, 0.0,  1.0,		0.2, 0.2, 0.2, // P
+
+	2.0,  2.0,  0.0,  1.0,		1.0, 1.0, 1.0, // B
+	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	1.0,  1.0,  1.0,  1.0,		0.2, 0.2, 0.2, // R
+
+	1.0,  1.0,  1.0,  1.0,		0.2, 0.2, 0.2, // R
+	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-1.0, -1.0, 1.0,  1.0,		1.0, 1.0, 1.0, // O
+
+	-1.0, -1.0, 1.0,  1.0,		1.0, 1.0, 1.0, // O
+	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-2.0, -2.0, 0.0,  1.0,		0.2, 0.2, 0.2, // P
+
+	-2.0, -2.0, 0.0,  1.0,		0.2, 0.2, 0.2, // P
+	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	-1.0, -1.0, -1.0, 1.0,		1.0, 1.0, 1.0, // G
+
+	-1.0, -1.0, -1.0, 1.0,		1.0, 1.0, 1.0, // G
+	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	1.0,  1.0, -1.0,  1.0,		0.2, 0.2, 0.2, // Y
+
+	1.0,  1.0, -1.0,  1.0,		0.2, 0.2, 0.2, // Y
+	-8.0,  8.0, 0.0, 1.0,		0.0, 0.0, 1.0, // W
+	2.0,  2.0,  0.0,  1.0,		1.0, 1.0, 1.0, // B
+
+
+	// Ear
+	0.0,  0.0,  0.0,  1.0, 		0.5, 0.0, 0.5, // A
+	1.0,  0.0,  1.0,  1.0,		0.0, 0.0, 0.0, // C
+	0.0,  0.5,  1.0,  1.0,		1.0, 1.0, 0.0, // D
+
+	0.0,  0.5,  1.0,  1.0,		1.0, 1.0, 0.0, // D
+	1.0,  0.0,  1.0,  1.0,		0.0, 0.0, 0.0, // C
+	0.0,  0.0,  3.0,  1.0,		0.0, 0.8, 0.4, // B
+
+	0.0,  0.0,  3.0,  1.0,		0.0, 0.8, 0.4, // B
+	1.0,  0.0,  1.0,  1.0,		0.0, 0.0, 0.0, // C
+	0.0, -0.5,  1.0,  1.0,		0.7, 0.2, 0.0, // E
+
+	0.0, -0.5,  1.0,  1.0,		0.7, 0.2, 0.0, // E
+	1.0,  0.0,  1.0,  1.0,		0.0, 0.0, 0.0, // C
+	0.0,  0.0,  0.0,  1.0, 		0.5, 0.0, 0.5, // A
+
+	0.0,  0.0,  0.0,  1.0, 		0.5, 0.0, 0.5, // A
+	0.0,  0.5,  1.0,  1.0,		1.0, 1.0, 0.0, // D
+	0.0, -0.5,  1.0,  1.0,		0.7, 0.2, 0.0, // E
+
+	0.0,  0.5,  1.0,  1.0,		1.0, 1.0, 0.0, // D
+	0.0, -0.5,  1.0,  1.0,		0.7, 0.2, 0.0, // E
+	0.0,  0.0,  3.0,  1.0,		0.0, 0.8, 0.4, // B
+
 
 	 0.0, 0.0, 0.0, 1.0,            1.0, 0.0, 0.0, // Node A
 	 0.0, 0.0, 0.5, 1.0,           1.0, 1.0, 1.0, //Node B
@@ -426,7 +551,7 @@ function drawAll() {
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
   		// Draw triangles: start at vertex 0 and draw 12 vertices
   //gl.drawArrays(gl.TRIANGLES, 0, 12);
-  gl.drawArrays(gl.TRIANGLES, 12, 42);
+  gl.drawArrays(gl.TRIANGLES, 102, 42);
 
   //pushMatrix(g_modelMatrix)
 
@@ -439,7 +564,7 @@ function drawAll() {
 
 
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
-  gl.drawArrays(gl.TRIANGLES, 12, 54);
+  gl.drawArrays(gl.TRIANGLES, 102, 54);
 
   pushMatrix(g_modelMatrix)
   
@@ -448,7 +573,7 @@ function drawAll() {
  g_modelMatrix.scale(0.5, 0.25, 0.5);
  g_modelMatrix.rotate(g_balloon_angle01*1.1, 1,0,0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 12, 42);
+ gl.drawArrays(gl.TRIANGLES, 102, 42);
 
 
  ////// ARMS
@@ -456,12 +581,17 @@ function drawAll() {
  g_modelMatrix = popMatrix();
  pushMatrix(g_modelMatrix);
 
+
+	//-------------------------------
+	// DRAW 2 TRIANGLES:		Use this matrix to transform & draw
+	//						the different set of vertices stored in our VBO:
+
  g_modelMatrix.rotate(90, 0, 0, 1);
  g_modelMatrix.translate(0.2, 0, 0.2)
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 12, 30);
+ gl.drawArrays(gl.TRIANGLES, 102, 30);
  
 
 
@@ -472,37 +602,160 @@ function drawAll() {
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 12, 30); 
+ gl.drawArrays(gl.TRIANGLES, 102, 30); 
 
+
+
+ ///JESSICA'S GIRAFFE
+
+
+	// NEXT, create different drawing axes, and...
+	g_modelMatrix.setTranslate(0.6, 0.0, 0.0);  // 'set' means DISCARD old matrix,
+	// (drawing axes centered in CVV), and then make new
+	// drawing axes moved to the lower-left corner of CVV.
+
+g_modelMatrix.scale(1.0, 1.0, -1.0);
+g_modelMatrix.scale(0.9, 0.9, 0.9);
+// Mouse-Dragging for Rotation:
+//-----------------------------
+// Attempt 1:  X-axis, then Y-axis rotation:
+/*  						// First, rotate around x-axis by the amount of -y-axis dragging:
+g_modelMatrix.rotate(-g_yMdragTot*120.0, 1, 0, 0); // drag +/-1 to spin -/+120 deg.
+	// Then rotate around y-axis by the amount of x-axis dragging
+g_modelMatrix.rotate( g_xMdragTot*120.0, 0, 1, 0); // drag +/-1 to spin +/-120 deg.
+// Acts SENSIBLY if I always drag mouse to turn on Y axis, then X axis.
+// Acts WEIRDLY if I drag mouse to turn on X axis first, then Y axis.
+// ? Why is is 'backwards'? Duality again!
+*/
+//-----------------------------
+
+  // Draw Giraffe Neck
+  	g_modelMatrix.translate(0.0, 0.0, 0.0);  // 'set' means DISCARD old matrix,
+					// (drawing axes centered in CVV), and then make new
+  						// drawing axes moved to the lower-left corner of CVV. 
+  	//g_modelMatrix.scale(0.1,0.1,-0.1);							// convert to left-handed coord sys
+  																				// to match WebGL display canvas.
+  	g_modelMatrix.scale(0.05, 0.05, 0.05);
+  						// if you DON'T scale, tetra goes outside the CVV; clipped!
+	g_modelMatrix.rotate(45, 0, 1, 0);  // Make new drawing axes that
+	g_modelMatrix.rotate(g_angleG_n, 0, 0, 1);
+
+  // DRAW:  Use this matrix to transform & draw 
+  //						the first set of vertices stored in our VBO:
+  		// Pass our current matrix to the vertex shaders:
+  	gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+  		// Draw triangles: start at vertex 0 and draw 12 vertices
+	DrawGiraffeNeck();
+	  
+
+	// Draw Giraffe Head
+	g_modelMatrix.translate(-14.0, 14.0, 0.0);  // 'set' means DISCARD old matrix,
+	// (drawing axes centered in CVV), and then make new
+		// drawing axes moved to the lower-left corner of CVV. 
+	//g_modelMatrix.scale(1.0, 1.0, -1.0);							// convert to left-handed coord sys
+																// to match WebGL display canvas.
+	g_modelMatrix.scale(0.5, 0.5, 0.5);
+		// if you DON'T scale, tetra goes outside the CVV; clipped!
+	g_modelMatrix.rotate(90, 0, 0, 1);  // Make new drawing axes that
+	g_modelMatrix.rotate(g_angleG_h, 0, 0, 1);
+
+	// DRAW:  Use this matrix to transform & draw 
+	//						the first set of vertices stored in our VBO:
+	// Pass our current matrix to the vertex shaders:
+	gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+	// Draw triangles: start at vertex 0 and draw 12 vertices
+	DrawGiraffeHead();
+	pushMatrix(g_modelMatrix);
+
+	
+	// Draw Giraffe Left Ear
+	g_modelMatrix.translate(0.0, 2.0, 1.0);  // 'set' means DISCARD old matrix,
+	// (drawing axes centered in CVV), and then make new
+		// drawing axes moved to the lower-left corner of CVV. 
+	//g_modelMatrix.scale(1.0, 1.0, -1.0);							// convert to left-handed coord sys
+																// to match WebGL display canvas.
+	g_modelMatrix.scale(2.0, 2.0, 2.0);
+		// if you DON'T scale, tetra goes outside the CVV; clipped!
+	g_modelMatrix.rotate(-75, 0, -0.1, 1);  // Make new drawing axes that
+
+	// DRAW:  Use this matrix to transform & draw 
+	//						the first set of vertices stored in our VBO:
+	// Pass our current matrix to the vertex shaders:
+	gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+	// Draw triangles: start at vertex 0 and draw 12 vertices
+	DrawGiraffeEar();
+	g_modelMatrix = popMatrix();
+	pushMatrix(g_modelMatrix);
+
+
+	// Draw Giraffe Right Ear
+	g_modelMatrix.translate(0.0, 2.0, -1.0);  // 'set' means DISCARD old matrix,
+	// (drawing axes centered in CVV), and then make new
+		// drawing axes moved to the lower-left corner of CVV. 
+	//g_modelMatrix.scale(1.0, 1.0, 1.0);							// convert to left-handed coord sys
+																// to match WebGL display canvas.
+	g_modelMatrix.scale(2.0, 2.0, -2.0);
+		// if you DON'T scale, tetra goes outside the CVV; clipped!
+	g_modelMatrix.rotate(-75, 0, -0.2, 1);  // Make new drawing axes that
+
+	// DRAW:  Use this matrix to transform & draw 
+	//						the first set of vertices stored in our VBO:
+	// Pass our current matrix to the vertex shaders:
+	gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
+	// Draw triangles: start at vertex 0 and draw 12 vertices
+	DrawGiraffeEar();
+	g_modelMatrix = popMatrix();
+
+}
+
+function DrawGiraffeNeck() {
+	gl.drawArrays(gl.TRIANGLES, 12, 30);
+}
+
+function DrawGiraffeHead() {
+	gl.drawArrays(gl.TRIANGLES, 42, 30);
+}
+
+function DrawGiraffeEar() {
+	gl.drawArrays(gl.TRIANGLES, 72, 18);
 }
 
 // Last time that this function was called:  (used for animation timing)
 var g_last = Date.now();
 
-function animate(angle) {
+function animate() {
 //==============================================================================
   // Calculate the elapsed time
   var now = Date.now();
   var elapsed = now - g_last;
   g_last = now;
-  
+
   // Update the current rotation angle (adjusted by the elapsed time)
   //  limit the angle to move smoothly between +120 and -85 degrees:
-//  if(angle >  120.0 && g_balloon_angle01Rate > 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
-//  if(angle <  -85.0 && g_balloon_angle01Rate < 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
-  
-  var newAngle = angle + (g_balloon_angle01Rate * elapsed) / 1000.0;
-  if(newAngle > 180.0) newAngle = newAngle - 360.0;
-  if(newAngle <-180.0) newAngle = newAngle + 360.0;
-  return newAngle;
-}
+  //if(g_angle01 >  120.0 && g_angle01Rate > 0) g_angle01Rate = -g_angle01Rate;
+  //if(g_angle01 <  -85.0 && g_angle01Rate < 0) g_angle01Rate = -g_angle01Rate;
 
-function animate(){
-	var now = Date.now();
-	var elapsed = now- g_last;
-	g_last = now;
 
-	if(g_balloon_angle01 >  30.0 && g_balloon_angle01Rate > 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
+  var newAngle1 = g_angle01 + (g_angle01Rate * elapsed) / 1000.0;
+  if(newAngle1 > 180.0) newAngle1 = newAngle1 - 360.0;
+  if(newAngle1 <-180.0) newAngle1 = newAngle1 + 360.0;
+  g_angle01 = newAngle1
+
+  var newAngleG_n = g_angleG_n + (g_angleG_nRate * elapsed) / 1000.0;
+  if(g_angleG_n >  g_angleG_nMax && g_angleG_nRate > 0) g_angleG_nRate = -g_angleG_nRate;
+  if(g_angleG_n <  g_angleG_nMin && g_angleG_nRate < 0) g_angleG_nRate = -g_angleG_nRate;
+  if(newAngleG_n > 180.0) newAngleG_n = newAngleG_n - 360.0;
+  if(newAngleG_n <-180.0) newAngleG_n = newAngleG_n + 360.0;
+  g_angleG_n = newAngleG_n
+
+  var newAngleG_h = g_angleG_h + (g_angleG_hRate * elapsed) / 1000.0;
+  if(g_angleG_h >  g_angleG_hMax && g_angleG_hRate > 0) g_angleG_hRate = -g_angleG_hRate;
+  if(g_angleG_h <  g_angleG_hMin && g_angleG_hRate < 0) g_angleG_hRate = -g_angleG_hRate;
+  if(newAngleG_h > 180.0) newAngleG_h = newAngleG_h - 360.0;
+  if(newAngleG_h <-180.0) newAngleG_h = newAngleG_h + 360.0;
+  g_angleG_h = newAngleG_h
+
+  if(g_balloon_angle01 >  30.0 && g_balloon_angle01Rate > 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
   	if(g_balloon_angle01 < -30.0 && g_balloon_angle01Rate < 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
 	  g_balloon_angle01 = g_balloon_angle01 + (g_balloon_angle01Rate * elapsed) / 1000.0;
 	  
@@ -516,7 +769,6 @@ function animate(){
 	  if (newdisplacement > 0.8) g_balloon_xdistancerate = -g_balloon_xdistancerate;
 	  if (newdisplacement < -0.8) g_balloon_xdistancerate = -g_balloon_xdistancerate;
 	  g_balloon_xdistance = newdisplacement;
-	
 }
 
 //==================HTML Button Callbacks======================
