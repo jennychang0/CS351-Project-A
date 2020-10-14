@@ -602,7 +602,9 @@ function drawAll() {
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
   		// Draw triangles: start at vertex 0 and draw 12 vertices
   //gl.drawArrays(gl.TRIANGLES, 0, 12);
-  gl.drawArrays(gl.TRIANGLES, 90, 42);
+
+  DrawLowerBody();
+  
 
   //pushMatrix(g_modelMatrix)
 
@@ -615,7 +617,7 @@ function drawAll() {
 
 
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
-  gl.drawArrays(gl.TRIANGLES, 90, 54);
+  DrawUpperBody();
 
   pushMatrix(g_modelMatrix)
   
@@ -624,7 +626,8 @@ function drawAll() {
  g_modelMatrix.scale(0.5, 0.25, 0.5);
  g_modelMatrix.rotate(g_balloon_angle01*1.1, 1,0,0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 90, 42);
+ DrawHead();
+ 
 
 
  ////// ARMS
@@ -642,7 +645,9 @@ function drawAll() {
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 90, 30);
+
+ DrawLeftArm();
+ 
  
 
 
@@ -653,8 +658,9 @@ function drawAll() {
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 90, 30); 
 
+ DrawRightArm();
+ 
 
 
  ///JESSICA'S GIRAFFE
@@ -797,7 +803,26 @@ g_modelMatrix.rotate(dist*120.0, -g_yMdragTot+0.0001, g_xMdragTot+0.0001, 0.0);
 	DrawGiraffeEar();
 	g_modelMatrix = popMatrix();
 
+}
 
+function DrawLowerBody(){
+	gl.drawArrays(gl.TRIANGLES, 90, 42);
+}
+
+function DrawUpperBody(){
+	gl.drawArrays(gl.TRIANGLES, 90, 54);
+}
+
+function DrawHead(){
+	gl.drawArrays(gl.TRIANGLES, 90, 42);
+}
+
+function DrawLeftArm(){
+	gl.drawArrays(gl.TRIANGLES, 90, 30);
+}
+
+function DrawRightArm(){
+	gl.drawArrays(gl.TRIANGLES, 90, 30); 
 }
 
 function DrawGiraffeNeck() {
