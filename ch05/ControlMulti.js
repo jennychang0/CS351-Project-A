@@ -551,7 +551,7 @@ function drawAll() {
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
   		// Draw triangles: start at vertex 0 and draw 12 vertices
   //gl.drawArrays(gl.TRIANGLES, 0, 12);
-  gl.drawArrays(gl.TRIANGLES, 102, 42);
+  gl.drawArrays(gl.TRIANGLES, 90, 42);
 
   //pushMatrix(g_modelMatrix)
 
@@ -564,7 +564,7 @@ function drawAll() {
 
 
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
-  gl.drawArrays(gl.TRIANGLES, 102, 54);
+  gl.drawArrays(gl.TRIANGLES, 90, 54);
 
   pushMatrix(g_modelMatrix)
   
@@ -573,7 +573,7 @@ function drawAll() {
  g_modelMatrix.scale(0.5, 0.25, 0.5);
  g_modelMatrix.rotate(g_balloon_angle01*1.1, 1,0,0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 102, 42);
+ gl.drawArrays(gl.TRIANGLES, 90, 42);
 
 
  ////// ARMS
@@ -591,7 +591,7 @@ function drawAll() {
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 102, 30);
+ gl.drawArrays(gl.TRIANGLES, 90, 30);
  
 
 
@@ -602,7 +602,7 @@ function drawAll() {
  g_modelMatrix.scale(0.3, 3, 0.3);
  g_modelMatrix.rotate(g_balloon_angle02, 0, 1, 0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
- gl.drawArrays(gl.TRIANGLES, 102, 30); 
+ gl.drawArrays(gl.TRIANGLES, 90, 30); 
 
 
 
