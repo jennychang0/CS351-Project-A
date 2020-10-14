@@ -610,9 +610,9 @@ function drawAll() {
 
 
 	// NEXT, create different drawing axes, and...
-	g_modelMatrix.setTranslate(0.6, 0.0, 0.0);  // 'set' means DISCARD old matrix,
-	// (drawing axes centered in CVV), and then make new
-	// drawing axes moved to the lower-left corner of CVV.
+g_modelMatrix.setTranslate(0.6, 0.0, 0.0);  // 'set' means DISCARD old matrix,
+// (drawing axes centered in CVV), and then make new
+// drawing axes moved to the lower-left corner of CVV.
 
 g_modelMatrix.scale(1.0, 1.0, -1.0);
 g_modelMatrix.scale(0.9, 0.9, 0.9);
@@ -628,6 +628,9 @@ g_modelMatrix.rotate( g_xMdragTot*120.0, 0, 1, 0); // drag +/-1 to spin +/-120 d
 // ? Why is is 'backwards'? Duality again!
 */
 //-----------------------------
+
+var dist = Math.sqrt(g_xMdragTot*g_xMdragTot + g_yMdragTot*g_yMdragTot);
+g_modelMatrix.rotate(dist*120.0, -g_yMdragTot+0.0001, g_xMdragTot+0.0001, 0.0);
 
   // Draw Giraffe Neck
   	g_modelMatrix.translate(0.0, 0.0, 0.0);  // 'set' means DISCARD old matrix,
