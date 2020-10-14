@@ -67,13 +67,12 @@ var g_lastMS = Date.now();    			// Timestamp for most-recently-drawn image;
                                     // in milliseconds; used by 'animate()' fcn 
                                     // (now called 'timerAll()' ) to find time
                                     // elapsed since last on-screen image.
-var g_angle01 = 0;                  // initial rotation angle
-var g_angle01Rate = 45.0;  
+var g_balloon_angle01 = 0;                  // initial rotation angle
+var g_balloon_angle01Rate = 45.0;  
 var g_balloon_angle02 = 0;
 var g_balloon_angle02Rate = 90;     // rotation speed, in degrees/second 
-
-var g_xdistance = 0;
-var g_xdistancerate = 0.2;
+var g_balloon_xdistance = 0;
+var g_balloon_xdistancerate = 0.2;
 
 //------------For mouse click-and-drag: -------------------------------
 var g_isDrag=false;		// mouse-drag: true when user holds down mouse button
@@ -176,7 +175,7 @@ function main() {
   // Create a local version of our model matrix in JavaScript 
   var modelMatrix = new Matrix4();
 */
-/* REPLACED by global g_angle01 variable (declared at top)
+/* REPLACED by global g_balloon_angle01 variable (declared at top)
   // Create, init current rotation angle value in JavaScript
   var currentAngle = 0.0;
 */
@@ -184,10 +183,10 @@ function main() {
   // ANIMATION: create 'tick' variable whose value is this function:
   //----------------- 
   var tick = function() {
-    // g_angle01 = animate(g_angle01);  // Update the rotation angle
+    // g_balloon_angle01 = animate(g_balloon_angle01);  // Update the rotation angle
     animate();
 	drawAll();   // Draw all parts
-//    console.log('g_angle01=',g_angle01.toFixed(5)); // put text in console.
+//    console.log('g_balloon_angle01=',g_balloon_angle01.toFixed(5)); // put text in console.
 
 //	Show some always-changing text in the webpage :  
 //		--find the HTML element called 'CurAngleDisplay' in our HTML page,
@@ -196,7 +195,7 @@ function main() {
 //				on-screen text that reports our current angle value:
 //		--HINT: don't confuse 'getElementByID() and 'getElementById()
 		document.getElementById('CurAngleDisplay').innerHTML= 
-			'g_angle01= '+g_angle01.toFixed(5);
+			'g_balloon_angle01= '+g_balloon_angle01.toFixed(5);
 		// Also display our current mouse-dragging state:
 		document.getElementById('Mouse').innerHTML=
 			'Mouse Drag totals (CVV coords):\t'+
@@ -418,9 +417,9 @@ function drawAll() {
   g_modelMatrix.scale(0.25, 0.5, 0.5);
   g_modelMatrix.rotate(30, 0, 1, 0);
   						// if you DON'T scale, tetra goes outside the CVV; clipped!
-  g_modelMatrix.rotate(g_angle01, 1, 0, 0);  // Make new drawing axes that
+  g_modelMatrix.rotate(g_balloon_angle01, 1, 0, 0);  // Make new drawing axes that
   g_modelMatrix.translate(-0.25, -1.2, -0.25);
-  g_modelMatrix.translate(g_xdistance, 1.0, 0, 0);
+  g_modelMatrix.translate(g_balloon_xdistance, 1.0, 0, 0);
   // DRAW TETRA:  Use this matrix to transform & draw 
   //						the first set of vertices stored in our VBO:
   		// Pass our current matrix to the vertex shaders:
@@ -434,7 +433,7 @@ function drawAll() {
   /////  draw the smaller body above big body
   g_modelMatrix.translate(0.07, 1.83, 0.43);
   g_modelMatrix.scale(0.75, -0.77, -0.45);
-  g_modelMatrix.rotate(g_angle01*0.5, 1,0,0);
+  g_modelMatrix.rotate(g_balloon_angle01*0.5, 1,0,0);
 //   g_modelMatrix.translate(-0.25, 0.0, -0.25);
 //   g_modelMatrix.translate(-0.1, 0, 0);
 
@@ -447,7 +446,7 @@ function drawAll() {
  /////draw head
  g_modelMatrix.translate(0.13, -0.26, 0.03);
  g_modelMatrix.scale(0.5, 0.25, 0.5);
- g_modelMatrix.rotate(g_angle01*1.1, 1,0,0);
+ g_modelMatrix.rotate(g_balloon_angle01*1.1, 1,0,0);
  gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
  gl.drawArrays(gl.TRIANGLES, 12, 42);
 
@@ -532,10 +531,10 @@ function animate(angle) {
   
   // Update the current rotation angle (adjusted by the elapsed time)
   //  limit the angle to move smoothly between +120 and -85 degrees:
-//  if(angle >  120.0 && g_angle01Rate > 0) g_angle01Rate = -g_angle01Rate;
-//  if(angle <  -85.0 && g_angle01Rate < 0) g_angle01Rate = -g_angle01Rate;
+//  if(angle >  120.0 && g_balloon_angle01Rate > 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
+//  if(angle <  -85.0 && g_balloon_angle01Rate < 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
   
-  var newAngle = angle + (g_angle01Rate * elapsed) / 1000.0;
+  var newAngle = angle + (g_balloon_angle01Rate * elapsed) / 1000.0;
   if(newAngle > 180.0) newAngle = newAngle - 360.0;
   if(newAngle <-180.0) newAngle = newAngle + 360.0;
   return newAngle;
@@ -546,9 +545,9 @@ function animate(){
 	var elapsed = now- g_last;
 	g_last = now;
 
-	if(g_angle01 >  30.0 && g_angle01Rate > 0) g_angle01Rate = -g_angle01Rate;
-  	if(g_angle01 < -30.0 && g_angle01Rate < 0) g_angle01Rate = -g_angle01Rate;
-	  g_angle01 = g_angle01 + (g_angle01Rate * elapsed) / 1000.0;
+	if(g_balloon_angle01 >  30.0 && g_balloon_angle01Rate > 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
+  	if(g_balloon_angle01 < -30.0 && g_balloon_angle01Rate < 0) g_balloon_angle01Rate = -g_balloon_angle01Rate;
+	  g_balloon_angle01 = g_balloon_angle01 + (g_balloon_angle01Rate * elapsed) / 1000.0;
 	  
 	  var newAngle = g_balloon_angle02 + (g_balloon_angle02Rate * elapsed) / 1000.0;
 	  if(newAngle > 180.0) newAngle = newAngle - 360.0;
@@ -556,10 +555,10 @@ function animate(){
 	  g_balloon_angle02= newAngle;
 
 	
-	  var newdisplacement = g_xdistance + g_xdistancerate * elapsed / 1000.0;
-	  if (newdisplacement > 0.8) g_xdistancerate = -g_xdistancerate;
-	  if (newdisplacement < -0.8) g_xdistancerate = -g_xdistancerate;
-	  g_xdistance = newdisplacement;
+	  var newdisplacement = g_balloon_xdistance + g_balloon_xdistancerate * elapsed / 1000.0;
+	  if (newdisplacement > 0.8) g_balloon_xdistancerate = -g_balloon_xdistancerate;
+	  if (newdisplacement < -0.8) g_balloon_xdistancerate = -g_balloon_xdistancerate;
+	  g_balloon_xdistance = newdisplacement;
 	
 }
 
@@ -577,7 +576,7 @@ function angleSubmit() {
 // the HTML 'div' element with id='editBoxOut':
   document.getElementById('EditBoxOut').innerHTML ='You Typed: '+UsrTxt;
   console.log('angleSubmit: UsrTxt:', UsrTxt); // print in console, and
-  g_angle01 = parseFloat(UsrTxt);     // convert string to float number 
+  g_balloon_angle01 = parseFloat(UsrTxt);     // convert string to float number 
 };
 
 function clearDrag() {
@@ -590,28 +589,28 @@ function spinUp() {
 // Called when user presses the 'Spin >>' button on our webpage.
 // ?HOW? Look in the HTML file (e.g. ControlMulti.html) to find
 // the HTML 'button' element with onclick='spinUp()'.
-  g_angle01Rate += 25; 
+  g_balloon_angle01Rate += 25; 
 }
 
 function spinDown() {
 // Called when user presses the 'Spin <<' button
- g_angle01Rate -= 25; 
+ g_balloon_angle01Rate -= 25; 
 }
 
 function runStop() {
 // Called when user presses the 'Run/Stop' button
-  if(g_angle01Rate*g_angle01Rate > 1) {  // if nonzero rate,
-	myTmp = g_angle01Rate;  // store the current rate,
+  if(g_balloon_angle01Rate*g_balloon_angle01Rate > 1) {  // if nonzero rate,
+	myTmp = g_balloon_angle01Rate;  // store the current rate,
 	Tmp2 = g_balloon_angle02Rate;
-	g_angle01Rate = 0;      // and set to zero.
+	g_balloon_angle01Rate = 0;      // and set to zero.
 	g_balloon_angle02Rate = 0;
-	X_tmp = g_xdistancerate;
-	g_xdistancerate = 0;
+	X_tmp = g_balloon_xdistancerate;
+	g_balloon_xdistancerate = 0;
   }
   else {    // but if rate is zero,
-	  g_angle01Rate = myTmp;  // use the stored rate.
+	  g_balloon_angle01Rate = myTmp;  // use the stored rate.
 	  g_balloon_angle02Rate = Tmp2;
-	  g_xdistancerate = X_tmp;
+	  g_balloon_xdistancerate = X_tmp;
   }
   
 }
