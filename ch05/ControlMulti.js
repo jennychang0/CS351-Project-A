@@ -1112,8 +1112,9 @@ function myKeyDown(kev) {
 		//------------------WASD navigation-----------------
 		case "KeyA":
 			console.log("a/A key: Strafe LEFT!\n");
+			g_balloon_angle02Rate = 90.0;
 			document.getElementById('KeyDownResult').innerHTML =  
-			'myKeyDown() found a/A key. Strafe LEFT!';
+			'\n ARMS ROTATION RATE: '+g_balloon_angle02Rate+' degrees/second';
 			break;
     case "KeyD":
 			console.log("d/D key: Strafe RIGHT!\n");
@@ -1134,22 +1135,24 @@ function myKeyDown(kev) {
 		case "ArrowLeft": 	
 			console.log(' left-arrow.');
 			// and print on webpage in the <div> element with id='Result':
-  		document.getElementById('KeyDownResult').innerHTML =
-  			'myKeyDown(): Left Arrow='+kev.keyCode;
+  			document.getElementById('KeyDownResult').innerHTML =
+			  '\n ARMS ROTATION RATE: '+g_balloon_angle02Rate+' degrees/second';
+			g_balloon_angle02Rate = g_balloon_angle02Rate - 5;
 			break;
 		case "ArrowRight":
 			console.log('right-arrow.');
-  		document.getElementById('KeyDownResult').innerHTML =
-  			'myKeyDown():Right Arrow:keyCode='+kev.keyCode;
+  			document.getElementById('KeyDownResult').innerHTML =
+			  '\n ARMS ROTATION RATE: '+g_balloon_angle02Rate+' degrees/second';
+			g_balloon_angle02Rate = g_balloon_angle02Rate + 5;
   		break;
 		case "ArrowUp":		
 			console.log('   up-arrow.');
-  		document.getElementById('KeyDownResult').innerHTML =
+  			document.getElementById('KeyDownResult').innerHTML =
   			'myKeyDown():   Up Arrow:keyCode='+kev.keyCode;
 			break;
 		case "ArrowDown":
 			console.log(' down-arrow.');
-  		document.getElementById('KeyDownResult').innerHTML =
+  			document.getElementById('KeyDownResult').innerHTML =
   			'myKeyDown(): Down Arrow:keyCode='+kev.keyCode;
   		break;	
     default:
