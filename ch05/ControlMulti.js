@@ -944,7 +944,17 @@ function runStop() {
 	  g_balloon_angle02Rate = Tmp2;
 	  g_balloon_xdistancerate = X_tmp;
   }
-  
+  if(g_angleG_h*g_angleG_hRate > 1) {  // if nonzero rate,
+	myTmp_gh = g_angleG_hRate;  // store the current rate,
+	Tmp2_gn = g_angleG_nRate;
+	g_angleG_hRate = 0;      // and set to zero.
+	g_angleG_nRate = 0;
+  }
+  else {    // but if rate is zero,
+	  g_angleG_hRate = myTmp_gh;  // use the stored rate.
+	  g_angleG_nRate = Tmp2_gn;
+  }
+
 }
 
 //===================Mouse and Keyboard event-handling Callbacks
@@ -1121,17 +1131,17 @@ function myKeyDown(kev) {
     case "KeyD":
 			console.log("d/D key: Strafe RIGHT!\n");
 			document.getElementById('KeyDownResult').innerHTML = 
-			'myKeyDown() found d/D key. Strafe RIGHT!';
+			'';
 			break;
 		case "KeyS":
 			console.log("s/S key: Move BACK!\n");
 			document.getElementById('KeyDownResult').innerHTML = 
-			'myKeyDown() found s/Sa key. Move BACK.';
+			'';
 			break;
 		case "KeyW":
 			console.log("w/W key: Move FWD!\n");
 			document.getElementById('KeyDownResult').innerHTML =  
-			'myKeyDown() found w/W key. Move FWD!';
+			'';
 			break;
 		//----------------Arrow keys------------------------
 		case "ArrowLeft": 	
@@ -1150,17 +1160,17 @@ function myKeyDown(kev) {
 		case "ArrowUp":		
 			console.log('   up-arrow.');
   			document.getElementById('KeyDownResult').innerHTML =
-  			'myKeyDown():   Up Arrow:keyCode='+kev.keyCode;
+  			'';
 			break;
 		case "ArrowDown":
 			console.log(' down-arrow.');
   			document.getElementById('KeyDownResult').innerHTML =
-  			'myKeyDown(): Down Arrow:keyCode='+kev.keyCode;
+  			'';
   		break;	
     default:
       console.log("UNUSED!");
   		document.getElementById('KeyDownResult').innerHTML =
-  			'myKeyDown(): UNUSED!';
+  			'';
       break;
 	}
 }
