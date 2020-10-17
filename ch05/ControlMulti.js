@@ -68,7 +68,7 @@ var g_lastMS = Date.now();    			// Timestamp for most-recently-drawn image;
                                     // (now called 'timerAll()' ) to find time
                                     // elapsed since last on-screen image.
 
-var g_angle01 = 0;                  // initial rotation angle
+var g_angle01 = 0;                  // initial arangle
 var g_angle01Rate = 45.0;           // rotation speed, in degrees/second
 
 var g_angleG_n = 0;                  // second rotation angle
@@ -173,7 +173,7 @@ function main() {
 	// END Keyboard & Mouse Event-Handlers---------------------------------------
 	
   // Specify the color for clearing <canvas>
-  gl.clearColor(0.3, 0.3, 0.3, 1.0);
+  gl.clearColor(1, 1, 1, 1.0);
 
 	// NEW!! Enable 3D depth-test when drawing: don't over-draw at any pixel 
 	// unless the new Z value is closer to the eye than the old one..
@@ -210,12 +210,12 @@ function main() {
 // 				and replace it's internal HTML commands (if any) with some
 //				on-screen text that reports our current angle value:
 //		--HINT: don't confuse 'getElementByID() and 'getElementById()
-		document.getElementById('CurAngleDisplay').innerHTML= 
-			'g_balloon_angle01= '+g_balloon_angle01.toFixed(5);
-		// Also display our current mouse-dragging state:
-		document.getElementById('Mouse').innerHTML=
-			'Mouse Drag totals (CVV coords):\t'+
-			g_xMdragTot.toFixed(5)+', \t'+g_yMdragTot.toFixed(5);	
+		// document.getElementById('CurAngleDisplay').innerHTML= 
+		// 	'g_balloon_angle01= '+g_balloon_angle01.toFixed(5);
+		// // Also display our current mouse-dragging state:
+		// document.getElementById('Mouse').innerHTML=
+		// 	'Mouse Drag totals (CVV coords):\t'+
+		// 	g_xMdragTot.toFixed(5)+', \t'+g_yMdragTot.toFixed(5);	
 		//--------------------------------
     requestAnimationFrame(tick, g_canvas);   
     									// Request that the browser re-draw the webpage
@@ -973,8 +973,8 @@ function myMouseDown(ev) {
 	g_xMclik = x;													// record where mouse-dragging began
 	g_yMclik = y;
 	// report on webpage
-	document.getElementById('MouseAtResult').innerHTML = 
-	  'Mouse At: '+x.toFixed(5)+', '+y.toFixed(5);
+	// document.getElementById('MouseAtResult').innerHTML = 
+	//   'Mouse At: '+x.toFixed(5)+', '+y.toFixed(5);
 };
 
 
@@ -1004,10 +1004,10 @@ function myMouseMove(ev) {
 	g_xMdragTot += (x - g_xMclik);					// Accumulate change-in-mouse-position,&
 	g_yMdragTot += (y - g_yMclik);
 	// Report new mouse position & how far we moved on webpage:
-	document.getElementById('MouseAtResult').innerHTML = 
-	  'Mouse At: '+x.toFixed(5)+', '+y.toFixed(5);
-	document.getElementById('MouseDragResult').innerHTML = 
-	  'Mouse Drag: '+(x - g_xMclik).toFixed(5)+', '+(y - g_yMclik).toFixed(5);
+	// document.getElementById('MouseAtResult').innerHTML = 
+	//   'Mouse At: '+x.toFixed(5)+', '+y.toFixed(5);
+	// document.getElementById('MouseDragResult').innerHTML = 
+	//   'Mouse Drag: '+(x - g_xMclik).toFixed(5)+', '+(y - g_yMclik).toFixed(5);
 
 	g_xMclik = x;													// Make next drag-measurement from here.
 	g_yMclik = y;
@@ -1038,9 +1038,9 @@ function myMouseUp(ev) {
 	g_xMdragTot += (x - g_xMclik);
 	g_yMdragTot += (y - g_yMclik);
 	// Report new mouse position:
-	document.getElementById('MouseAtResult').innerHTML = 
-	  'Mouse At: '+x.toFixed(5)+', '+y.toFixed(5);
-	console.log('myMouseUp: g_xMdragTot,g_yMdragTot =',g_xMdragTot,',\t',g_yMdragTot);
+	// document.getElementById('MouseAtResult').innerHTML = 
+	//   'Mouse At: '+x.toFixed(5)+', '+y.toFixed(5);
+	// console.log('myMouseUp: g_xMdragTot,g_yMdragTot =',g_xMdragTot,',\t',g_yMdragTot);
 };
 
 function myMouseClick(ev) {
@@ -1090,13 +1090,13 @@ function myKeyDown(kev) {
               "\n--kev.altKey:",  kev.altKey,   "\t--kev.metaKey:", kev.metaKey);
 
 // and report EVERYTHING on webpage:
-	document.getElementById('KeyDownResult').innerHTML = ''; // clear old results
-  document.getElementById('KeyModResult' ).innerHTML = ''; 
-  // key details:
-  document.getElementById('KeyModResult' ).innerHTML = 
-        "   --kev.code:"+kev.code   +"      --kev.key:"+kev.key+
-    "<br>--kev.ctrlKey:"+kev.ctrlKey+" --kev.shiftKey:"+kev.shiftKey+
-    "<br>--kev.altKey:"+kev.altKey +"  --kev.metaKey:"+kev.metaKey;
+// 	document.getElementById('KeyDownResult').innerHTML = ''; // clear old results
+//   document.getElementById('KeyModResult' ).innerHTML = ''; 
+//   // key details:
+//   document.getElementById('KeyModResult' ).innerHTML = 
+//         "   --kev.code:"+kev.code   +"      --kev.key:"+kev.key+
+//     "<br>--kev.ctrlKey:"+kev.ctrlKey+" --kev.shiftKey:"+kev.shiftKey+
+//     "<br>--kev.altKey:"+kev.altKey +"  --kev.metaKey:"+kev.metaKey;
  
 	switch(kev.code) {
 		case "KeyP":
