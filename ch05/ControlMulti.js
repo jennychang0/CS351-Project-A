@@ -88,6 +88,10 @@ var g_balloon_angle02Rate = 180;     // rotation speed, in degrees/second
 var g_balloon_xdistance = 0;
 var g_balloon_xdistancerate = 0.4;
 
+var g_init_r = 0.5;
+var g_init_g = 0.5;
+var g_init_b = 0.5;
+
 
 //------------For mouse click-and-drag: -------------------------------
 var g_isDrag=false;		// mouse-drag: true when user holds down mouse button
@@ -198,6 +202,8 @@ function main() {
   // ANIMATION: create 'tick' variable whose value is this function:
   //----------------- 
   var tick = function() {
+
+	g_maxVerts = initVertexBuffer(gl);  
 
     animate();  // Update the rotation angle
     drawAll();   // Draw all parts
@@ -371,7 +377,7 @@ function initVertexBuffer() {
 	0.0,  0.0,  3.0,  1.0,		0.0, 0.8, 0.4, // B
 
 
-	 -0.25, 0.1, -0.25, 1.0,            1.0, 0.0, 0.0, // Node A
+	 -0.25, 0.1, -0.25, 1.0,          1.0, 0.0, 0.0, // Node A
 	 -0.25, 0.1, 0.25, 1.0,           1.0, 1.0, 1.0, //Node B
 	 0.25, 0.1, -0.25, 1.0,            1.0, 0.0, 1.0, //Node C
 
@@ -379,12 +385,12 @@ function initVertexBuffer() {
 	 0.25, 0.1, -0.25, 1.0,             1.0, 0.0, 1.0, //Node C
 	 0.25, 0.1, 0.25, 1.0,            1.0, 1.0, 0.0, //Node D
 
-	 -0.25, 0.1, -0.25, 1.0,            1.0, 0.0, 0.0, // Node A
+	 -0.25, 0.1, -0.25, 1.0,          1.0, 0.0, 0.0, // Node A
 	 -0.25, 0.1, 0.25, 1.0,           1.0, 1.0, 1.0, //Node B
-	 -0.25, 1.1, 0.25, 1.0,            0.0, 0.0, 0.0,// Node E
+	 -0.25, 1.1, 0.25, 1.0,            g_init_r, g_init_g, g_init_b,//0.0, 0.0, 0.0,// Node E
 
-	 -0.25, 0.1, -0.25, 1.0,            1.0, 0.0, 0.0, // Node A
-	 -0.25, 1.1, 0.25, 1.0,            0.0, 0.0, 0.0,// Node E
+	 -0.25, 0.1, -0.25, 1.0,          1.0, 0.0, 0.0, // Node A
+	 -0.25, 1.1, 0.25, 1.0,            g_init_r, g_init_g, g_init_b,//0.0, 0.0, 0.0,// Node E
 	 -0.25, 1.1, -0.25, 1.0,            1.0, 1.0, 1.0, // Node F
 
 	 0.25, 1.1, -0.25, 1.0,             0.0, 1.0, 1.0, //Node G
@@ -395,7 +401,7 @@ function initVertexBuffer() {
 	 0.25, 0.1, 0.25, 1.0,            1.0, 1.0, 0.0, //Node D
 	 0.25, 1.1, 0.25, 1.0,             0.5, 1.0, 1.0, //Node H
 
-	 -0.25, 0.1, -0.25, 1.0,            1.0, 0.0, 0.0, // Node A
+	 -0.25, 0.1, -0.25, 1.0,           1.0, 0.0, 0.0, // Node A
 	 0.25, 0.1, -0.25, 1.0,             1.0, 0.0, 1.0, //Node C
 	 -0.25, 1.1, -0.25, 1.0,            1.0, 1.0, 1.0, // Node F
 
@@ -403,12 +409,12 @@ function initVertexBuffer() {
 	 0.25, 0.1, -0.25, 1.0,             1.0, 0.0, 1.0, //Node C
 	 0.25, 1.1, -0.25, 1.0,             0.0, 1.0, 1.0, //Node G
 
-	 -0.25, 1.1, 0.25, 1.0,            0.0, 0.0, 0.0,// Node E
+	 -0.25, 1.1, 0.25, 1.0,           g_init_r, g_init_g, g_init_b,//0.0, 0.0, 0.0,// Node E
 	 0.25, 1.1, 0.25, 1.0,            0.5, 1.0, 1.0, //Node H
 	 0.25, 0.1, 0.25, 1.0,            1.0, 1.0, 0.0, //Node D
 
 
-	 -0.25, 1.1, 0.25, 1.0,            0.0, 0.0, 0.0,// Node E
+	 -0.25, 1.1, 0.25, 1.0,            g_init_r, g_init_g, g_init_b,//0.0, 0.0, 0.0,// Node E
 	 0.25, 0.1, 0.25, 1.0,            1.0, 1.0, 0.0, //Node D
 	 -0.25, 0.1, 0.25, 1.0,           1.0, 1.0, 1.0, //Node B
 
@@ -423,18 +429,18 @@ function initVertexBuffer() {
 
 	 0.0, 1.2, 0.0, 1.0,          1.0, 0.0, 1.0, //Node I
 	 -0.25, 1.1, -0.25, 1.0,           1.0, 1.0, 1.0, // Node F
-	 -0.25, 1.1, 0.25, 1.0,            0.0, 0.0, 0.0,// Node E
+	 -0.25, 1.1, 0.25, 1.0,            g_init_r, g_init_g, g_init_b,//0.0, 0.0, 0.0,// Node E
 
 	 0.0, 1.2, 0.0, 1.0,          1.0, 0.0, 1.0, //Node I
-	 -0.25, 1.1, 0.25, 1.0,            0.0, 0.0, 0.0,// Node E
+	 -0.25, 1.1, 0.25, 1.0,            g_init_r, g_init_g, g_init_b,//0.0, 0.0, 0.0,// Node E
 	 0.25, 1.1, 0.25, 1.0,             0.5, 1.0, 1.0, //Node H
 
-	 -0.25, 0.1, -0.25, 1.0,            1.0, 0.0, 0.0, // Node A
+	 -0.25, 0.1, -0.25, 1.0,          1.0, 0.0, 0.0, // Node A
 	 -0.25, 0.1, 0.25, 1.0,           1.0, 1.0, 1.0, //Node B
 	 0.0, 0.0, 0.0, 1.0,        0.5, 0.5, 1.0, // Node J
 
 
-	 -0.25, 0.1, -0.25, 1.0,            1.0, 0.0, 0.0, // Node A
+	 -0.25, 0.1, -0.25, 1.0,          1.0, 0.0, 0.0, // Node A
 	 0.0, 0.0, 0.0, 1.0,        0.5, 0.5, 1.0, // Node J
 	 0.25, 0.1, -0.25, 1.0,             1.0, 0.0, 1.0, //Node C
 
@@ -911,10 +917,60 @@ function angleSubmit() {
   g_balloon_angle01 = parseFloat(UsrTxt);     // convert string to float number 
 };
 
+function r_colorSubmit() {
+	// Called when user presses 'Submit' button on our webpage
+	//		HOW? Look in HTML file (e.g. ControlMulti.html) to find
+	//	the HTML 'input' element with id='usrAngle'.  Within that
+	//	element you'll find a 'button' element that calls this fcn.
+	
+	// Read HTML edit-box contents:
+		var UsrTxt = document.getElementById('usrColor').value;	
+	// Display what we read from the edit-box: use it to fill up
+	// the HTML 'div' element with id='editBoxOut':
+	  // document.getElementById('EditBoxOut2').innerHTML ='You Typed: '+UsrTxt;
+	  console.log('colorSubmit: UsrTxt:', UsrTxt); // print in console, and
+	  g_init_r= parseFloat(UsrTxt);     // convert string to float number 
+	  console.log('g_init_r: ', g_init_r)
+	};
+function g_colorSubmit() {
+		// Called when user presses 'Submit' button on our webpage
+		//		HOW? Look in HTML file (e.g. ControlMulti.html) to find
+		//	the HTML 'input' element with id='usrAngle'.  Within that
+		//	element you'll find a 'button' element that calls this fcn.
+		
+		// Read HTML edit-box contents:
+			var UsrTxt = document.getElementById('usrColor2').value;	
+		// Display what we read from the edit-box: use it to fill up
+		// the HTML 'div' element with id='editBoxOut':
+		  // document.getElementById('EditBoxOut3').innerHTML ='You Typed: '+UsrTxt;
+		  console.log('colorSubmit: UsrTxt:', UsrTxt); // print in console, and
+		  g_init_g= parseFloat(UsrTxt);     // convert string to float number 
+		  console.log('g_init_g: ', g_init_g)
+		};
+function b_colorSubmit() {
+	// Called when user presses 'Submit' button on our webpage
+	//		HOW? Look in HTML file (e.g. ControlMulti.html) to find
+	//	the HTML 'input' element with id='usrAngle'.  Within that
+	//	element you'll find a 'button' element that calls this fcn.
+	
+	// Read HTML edit-box contents:
+		var UsrTxt = document.getElementById('usrColor3').value;	
+	// Display what we read from the edit-box: use it to fill up
+	// the HTML 'div' element with id='editBoxOut':
+	  // document.getElementById('EditBoxOut4').innerHTML ='You Typed: '+UsrTxt;
+	  console.log('colorSubmit: UsrTxt:', UsrTxt); // print in console, and
+	  g_init_b= parseFloat(UsrTxt);     // convert string to float number 
+	  console.log('g_init_b: ', g_init_b)
+	};
+
+
 function clearDrag() {
 // Called when user presses 'Clear' button in our webpage
 	g_xMdragTot = 0.0;
 	g_yMdragTot = 0.0;
+	g_init_r = 0.5;
+	g_init_g = 0.5;
+	g_init_b = 0.5;
 }
 
 function spinUp() {
@@ -944,16 +1000,16 @@ function runStop() {
 	  g_balloon_angle02Rate = Tmp2;
 	  g_balloon_xdistancerate = X_tmp;
   }
-  if(g_angleG_h*g_angleG_hRate > 1) {  // if nonzero rate,
-	myTmp_gh = g_angleG_hRate;  // store the current rate,
-	Tmp2_gn = g_angleG_nRate;
-	g_angleG_hRate = 0;      // and set to zero.
-	g_angleG_nRate = 0;
-  }
-  else {    // but if rate is zero,
-	  g_angleG_hRate = myTmp_gh;  // use the stored rate.
-	  g_angleG_nRate = Tmp2_gn;
-  }
+//   if(g_angleG_h*g_angleG_hRate > 1) {  // if nonzero rate,
+// 	myTmp_gh = g_angleG_hRate;  // store the current rate,
+// 	Tmp2_gn = g_angleG_nRate;
+// 	g_angleG_hRate = 0;      // and set to zero.
+// 	g_angleG_nRate = 0;
+//   }
+//   else {    // but if rate is zero,
+// 	  g_angleG_hRate = myTmp_gh;  // use the stored rate.
+// 	  g_angleG_nRate = Tmp2_gn;
+//   }
 
 }
 
@@ -1114,7 +1170,7 @@ function myKeyDown(kev) {
 			document.getElementById('KeyDownResult').innerHTML =  
 			'myKeyDown() found p/P key. Pause/unPause!';   // print on webpage
 			if(g_isRun==true) {
-			  g_isRun = false;    // STOP animation
+			  g_isRun = false;  
 			  }
 			else {
 			  g_isRun = true;     // RESTART animation
