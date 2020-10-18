@@ -39,6 +39,10 @@
 	<br>
 	  - Press the A key to reset arm rotation
 	<br>
+	  - Use your mouse to drag the giraffe in different directions
+	<br>
+	  - Click the "Reset" button to reset the giraffe position
+	<br>
 	<br>
 
 		<!-- <br> -->
@@ -60,15 +64,13 @@
 		  Note we use these totals to rotate the triangle at upper left.
 	-->
 		<div id='Mouse'>  </div>
-			<button type="button" onClick='clearDrag()'>Clear</button>
+			<button type="button" onClick='clearDrag()'>Reset</button>
 	<p>
 		<!--BUTTONS: commands below create HTML push-buttons with labels
 			Spin <<, runStop, and Spin >>.  
 		When users click the button, HTML calls JavaScript functions
 			"spinDown()", "runStop()" and "spinUp()"   -->
-      <button type="button" onclick="spinDown()">Spin << </button>
 	  <button type="button" onclick="runStop()">Run/Stop</button>
-      <button type="button" onclick="spinUp()">Spin >> </button>
     </p>
 	<!--	Load in the JavaScript libraries supplied by our textbook 
 			(Matsuda et al., 2013 WebGL Programming Guide) that help us
