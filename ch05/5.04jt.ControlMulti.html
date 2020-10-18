@@ -17,7 +17,7 @@
 	<div id= CurAngleDisplay></div> 
 	<!-- Next, make a simple block of text 
 	-->
-	New Balloon Guy Angle (-30 < x < +30 deg): 
+	Balloon Guy Start Angle (-30 < x < +30 deg): 
 	<!-- Next, make an HTML 'input' box element, a text-box 10 chars wide where users
 		can type in text.  Give it an ID name so that our JavaScript program
 		(e.g. ControlMulti.js, loaded near the end of this file) can access this
@@ -25,6 +25,18 @@
 	--><input id='usrAngle' size=10> 
 		<button type="button" onClick='angleSubmit()'>Submit</button><BR> 
 		<div id= EditBoxOut></div>
+	New (r,g,b) r value (0 <= r <= 1) for a vertex of the balloon guy: 
+		<input id='usrColor' size=10> 
+		<button type="button" onClick='r_colorSubmit()'>Submit</button><BR> 
+		<div id= EditBoxOut2></div>
+	New (r,g,b) g value (0 <= g <= 1) for a vertex of the balloon guy: 
+		<input id='usrColor2' size=10> 
+		<button type="button" onClick='g_colorSubmit()'>Submit</button><BR> 
+		<div id= EditBoxOut3></div>
+		New (r,g,b) b value (0 <= b <= 1) for a vertex of the balloon guy: 
+		<input id='usrColor3' size=10> 
+		<button type="button" onClick='b_colorSubmit()'>Submit</button><BR> 
+		<div id= EditBoxOut4></div>
 	</p>
 	<!-- Open the JavaScript Console, please: <br>
     	</t> (right-click--><!--'Inspect' or 'Inspect element'--><!--'Console' tab) <br> -->
@@ -43,6 +55,7 @@
 	<br>
 	  - Click the "Reset" button to reset the giraffe position
 	<br>
+	 - Click the "Run/Stop" button to stop/resume the balloon guy's motion
 	<br>
 
 		<!-- <br> -->
