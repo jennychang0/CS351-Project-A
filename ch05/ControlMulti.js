@@ -504,7 +504,7 @@ function initVertexBuffer() {
 
 
   ]);
-  g_vertsMax = 58;		// 12 tetrahedron vertices.
+  g_vertsMax = 148;		// 12 tetrahedron vertices.
   								// we can also draw any subset of these we wish,
   								// such as the last 3 vertices.(onscreen at upper right)
 	
